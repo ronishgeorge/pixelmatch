@@ -212,7 +212,7 @@ pixelmatch/
 >
 > - Designed and implemented a hybrid multi-modal retrieval and recommendation pipeline indexing a 100,000-SKU synthetic catalog and 1,000,000 user-product interactions across 12 categories, addressing both visual-intent miss in unimodal text search and cold-start retrieval invisible to collaborative filtering
 > - Built 5 encoders (Sentence-BERT text, CLIP image, and 3 multimodal fusion strategies — early concatenation, late-score averaging, learned MLP projection), 4 retrievers (TF-IDF, BM25, FAISS HNSW, hybrid), and 4 recommenders (two-tower neural net, ALS matrix factorization, content-based, hybrid blend) with a LambdaMART (LightGBM) learning-to-rank re-ranker
-> - Constructed an end-to-end benchmarking harness evaluating 9 retrieval configurations on 5 ranking metrics (NDCG@10, MRR, recall@k, precision@k, MAP@k) with a held-out cold-start protocol over 10,000 zero-interaction items and per-query p50/p95/p99 latency instrumentation
+> - Constructed an end-to-end benchmarking harness supporting **4 retrieval and 4 recommendation methods** evaluated on **5 ranking metrics implemented in `evaluation/metrics.py`** (NDCG@k, MRR, recall@k, precision@k, MAP@k) with a held-out cold-start protocol over **10,000 zero-interaction items** and per-query p50/p95 latency instrumentation
 
 ---
 
