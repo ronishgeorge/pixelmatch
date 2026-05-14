@@ -1,0 +1,66 @@
+{
+  "headline": {
+    "catalog_size": 100000,
+    "interactions_total": 1005000,
+    "evaluation_queries": 996,
+    "cold_start_queries": 27,
+    "baseline_method": "bm25",
+    "best_method": "tfidf",
+    "best_ndcg_10": 0.8848242005786813,
+    "baseline_ndcg_10": 0.8701036714801104,
+    "ndcg_10_improvement_pct_vs_bm25": 1.691813238016815,
+    "best_cold_recall_10": 0.0011187913550207494,
+    "best_p95_latency_ms": 23.111874999955262,
+    "seed": 42
+  },
+  "per_method": {
+    "bm25": {
+      "ndcg_10": 0.8701036714801104,
+      "mrr": 0.8301121151271753,
+      "recall_10": 0.001088392974358513,
+      "precision_5": 0.866265060240964,
+      "cold_recall_10": 0.0011232199956367891,
+      "p50_latency_ms": 243.60556249999377,
+      "p95_latency_ms": 347.07805200004316,
+      "p99_latency_ms": 545.1079535499046,
+      "n_queries": 996,
+      "n_cold_queries": 27
+    },
+    "tfidf": {
+      "ndcg_10": 0.8848242005786813,
+      "mrr": 0.84630187416332,
+      "recall_10": 0.0010994476156940345,
+      "precision_5": 0.8869477911646587,
+      "cold_recall_10": 0.0011187913550207494,
+      "p50_latency_ms": 21.346499499998117,
+      "p95_latency_ms": 23.111874999955262,
+      "p99_latency_ms": 26.3320476000672,
+      "n_queries": 996,
+      "n_cold_queries": 27
+    },
+    "sbert_text": {
+      "ndcg_10": 0.7724669572824409,
+      "mrr": 0.6945348855740422,
+      "recall_10": 0.001003281463753089,
+      "precision_5": 0.7744979919678716,
+      "cold_recall_10": 0.00109181300603299,
+      "p50_latency_ms": 11.295333499958815,
+      "p95_latency_ms": 13.823780999956625,
+      "p99_latency_ms": 30.677040199924473,
+      "n_queries": 996,
+      "n_cold_queries": 27
+    },
+    "multimodal_hybrid": {
+      "ndcg_10": 0.7859650434736313,
+      "mrr": 0.883825380888634,
+      "recall_10": 0.0009340992302060826,
+      "precision_5": 0.805421686746988,
+      "cold_recall_10": 0.0010344547549131597,
+      "p50_latency_ms": 249.105208499941,
+      "p95_latency_ms": 328.8049582499468,
+      "p99_latency_ms": 529.0411110500015,
+      "n_queries": 996,
+      "n_cold_queries": 27
+    }
+  }
+}
