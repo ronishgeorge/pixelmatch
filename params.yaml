@@ -1,0 +1,73 @@
+# PixelMatch global configuration
+seed: 42
+
+catalog:
+  num_products: 100000
+  num_categories: 12
+  image_size: 224
+  output_dir: data/
+
+interactions:
+  num_users: 50000
+  num_products: 100000
+  num_interactions: 1000000
+  cold_product_fraction: 0.10           # 10K cold products
+  zipf_alpha: 1.15
+
+encoders:
+  text_model: sentence-transformers/all-MiniLM-L6-v2
+  text_dim: 384
+  image_backbone: resnet50              # one of: resnet50 | clip
+  image_dim: 2048                       # 2048 for resnet50, 512 for clip
+  clip_model: openai/clip-vit-base-patch32
+  device: cpu                           # cpu | cuda | mps
+  batch_size: 64
+  cache_dir: data/cache
+
+fusion:
+  strategy: learned_projection          # early_concat | late_avg | learned_projection
+  projection_dim: 256
+  text_weight: 0.6
+  image_weight: 0.4
+
+faiss:
+  index_type: hnsw                      # hnsw | ivf
+  hnsw_m: 32
+  hnsw_ef_construction: 200
+  hnsw_ef_search: 64
+  ivf_nlist: 1024
+  ivf_nprobe: 16
+
+two_tower:
+  user_emb_dim: 64
+  hidden_dim: 256
+  output_dim: 256
+  dropout: 0.1
+  lr: 0.001
+  batch_size: 1024
+  epochs: 5
+  negative_samples: 4
+
+als:
+  factors: 64
+  regularization: 0.01
+  iterations: 15
+  alpha: 40.0
+
+ltr:
+  num_leaves: 31
+  learning_rate: 0.05
+  n_estimators: 200
+  min_data_in_leaf: 20
+
+serving:
+  host: 0.0.0.0
+  port: 8080
+  topk_default: 10
+  rerank_window: 100
+
+evaluation:
+  k_values: [1, 5, 10, 20]
+  ndcg_baseline_uplift_target: 0.35
+  cold_recall_target: 0.85
+  latency_p95_target_ms: 50

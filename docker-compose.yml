@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  pixelmatch-api:
+    build: .
+    image: pixelmatch:latest
+    container_name: pixelmatch-api
+    ports:
+      - "8080:8080"
+    environment:
+      - PIXELMATCH_REDIS_URL=redis://redis:6379/0
+      - PYTHONPATH=/app/src
+    depends_on:
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: pixelmatch-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  # --- Optional observability stack (uncomment to enable) ---
+  # prometheus:
+  #   image: prom/prometheus:latest
+  #   container_name: pixelmatch-prometheus
+  #   ports:
+  #     - "9090:9090"
+  #   volumes:
+  #     - ./ops/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  #
+  # grafana:
+  #   image: grafana/grafana:latest
+  #   container_name: pixelmatch-grafana
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - GF_SECURITY_ADMIN_PASSWORD=admin
